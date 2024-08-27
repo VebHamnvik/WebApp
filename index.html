@@ -41,7 +41,7 @@
 
           <div>
             <label for="image">Image Link:</label>
-            <input type="url" id="image" name="image" placeholder="Enter the url for the image" required>
+            <input type="text" id="image" name="image" placeholder="Enter the url for the image" required>
         </div>
         <button class="add-project-btn" type="submit">Submit project</button>
         </form>
@@ -49,7 +49,7 @@
 
       <section id="projectsList">
         <h1>My projects</h1>
-        <ul class="projects-list"></ul>
+        <ul id="projects-list"></ul>
       </section>
       
       
@@ -60,6 +60,6 @@
       </section>
     </footer>
     <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="main.ts"></script>
   </body>
 </html>
