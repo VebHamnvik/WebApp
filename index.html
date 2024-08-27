@@ -16,9 +16,43 @@
       </nav>
     </header>
     <main class="main">
-      <h1>My projects</h1>
-      <ul class="projects-list"></ul>
-      <button class="add-project-btn" type="button">Add project</button>
+      <section id="newProjects">
+        <h1>Add a new project</h1>
+        <form id="projectForm">
+          <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter title of the project" required>
+          </div>
+          
+          <div>
+            <label for="description">Description of the project:</label>
+            <textarea id="description" name="description" rows="4" placeholder="Enter the description of the project"></textarea>
+          </div>
+
+          <div>
+            <label for="objective">Objective for this project:</label>
+            <input type="text" id="objective" name="objective" placeholder="Enter the objective of the project" required>
+          </div>
+
+          <div>
+            <label for="languages">Languages used:</label>
+            <input type="text" id="languages" name="languages" placeholder="Enter the languages used in this project" required>
+          </div>
+
+          <div>
+            <label for="image">Image Link:</label>
+            <input type="url" id="image" name="image" placeholder="Enter the url for the image" required>
+        </div>
+        <button class="add-project-btn" type="submit">Submit project</button>
+        </form>
+      </section>
+
+      <section id="projectsList">
+        <h1>My projects</h1>
+        <ul class="projects-list"></ul>
+      </section>
+      
+      
     </main>
     <footer class="footer">
       <section>

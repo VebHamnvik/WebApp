@@ -3,6 +3,24 @@
   display: revert;
 }
 
+h1 {
+  font-size: 2em; 
+  font-weight: bold; 
+
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0.83em 0;
+}
+
+h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
 /* Preferred box-sizing value */
 *,
 *::before,
@@ -90,15 +108,15 @@ meter {
 
 body {
   grid-template-rows: auto 1fr auto;
-  height: 100%;
   margin: 0;
+  height: 100vh;
 }
 
 .header {
   display:flex;
   gap: 1rem;
   background: linear-gradient(to right, var(--bgHeader1), var(--bhHeader2));
-  height: 3rem;
+  height: 5vh;
   align-items: center;
   font-size: 1.4rem;
   text-shadow: 
@@ -115,27 +133,24 @@ body {
 .main {
   background-color: #ffffff;
   padding: 20px;
+  margin-bottom: 3rem;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 2rem;
   overflow-y: auto;
   color: black;
+  height: 100%;
 }
 
+#newProjects, #projectsList {
+  flex: 1; 
+  max-width: 45%; 
+  display: flex;
+  flex-direction: column;
+}
 
-.footer {
-  display:flex;
-  gap: 1rem;
-  background: linear-gradient(to right, var(--bgHeader1), var(--bhHeader2));
-  height: 3rem;
-  align-items: center;
-  font-size: 1.4rem;
-  justify-content: center;
-  font-size: 75%;
-  text-shadow: 
-    -0.25px -0.5px 0 #000,  
-     0.25px -0.5px 0 #000,
-    -0.25px  0.5px 0 #000,
-     0.25px  0.5px 0 #000; 
+#projectsList {
+  overflow-y: auto; 
 }
 
 .project-item {
@@ -179,13 +194,13 @@ body {
 
 button.add-project-btn {
   margin: 20px 0;
-  padding: 10px 20px;
-  background: linear-gradient(to right, var(--bgHeader1), var(--bhHeader2));
+  padding: 10px 20px;;
+  background: grey;
   color: #fff;
-  border: none;
+  border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
-  width: 8rem;
+  width: 10rem;
   height: 3rem;
   text-shadow: 
     -0.25px -0.5px 0 #000,  
@@ -197,4 +212,60 @@ button.add-project-btn {
 button.add-project-btn:hover {
   background-color: #666;
 }
+
+form {
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+
+  div {
+    margin-bottom: 15px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #888;
+    font-style: italic;
+    font-size: 75%;
+  }
+}
+
+.footer {
+  display:flex;
+
+  gap: 1rem;
+  background: linear-gradient(to right, var(--bgHeader1), var(--bhHeader2));
+  height: 5vh;
+  align-items: center;
+  font-size: 1.4rem;
+  justify-content: center;
+  font-size: 75%;
+  text-shadow: 
+    -0.25px -0.5px 0 #000,  
+     0.25px -0.5px 0 #000,
+    -0.25px  0.5px 0 #000,
+     0.25px  0.5px 0 #000; 
+}
+
+
+
+
+
+
 
