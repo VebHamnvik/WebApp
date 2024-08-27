@@ -60,8 +60,10 @@ form.addEventListener("submit", async (event: SubmitEvent) => {
 function updateProjectsList() {
     //if it exists
     if (!projectList) return;
-    
 
+    // Clear the list so it wont add duplicates
+    projectList.innerHTML = '';
+    
     // create a li element with som children
     for (const project of projects) {
         const listItem = document.createElement('li');
