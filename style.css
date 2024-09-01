@@ -117,7 +117,7 @@ body {
   display:flex;
   gap: 1rem;
   background: linear-gradient(to right, var(--bgHeader1), var(--bhHeader2));
-  height: 5vh;
+  height: 8vh;
   align-items: center;
   font-size: 1.4rem;
   text-shadow: 
