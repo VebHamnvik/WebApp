@@ -136,9 +136,8 @@ body {
   padding: 20px;
   display: flex;
   flex-direction: row;
-  gap: 2rem;
   color: black;
-  padding-bottom: 3rem;
+  padding-bottom: 5rem;
 }
 
 #newProjects, #projectsList {
@@ -247,10 +246,11 @@ form {
 
 .footer {
   display:flex;
-
-  gap: 1rem;
+  position: absolute;
+  bottom: 0;
   background: linear-gradient(to right, var(--bgHeader1), var(--bhHeader2));
-  height: 5vh;
+  height: 4rem;
+  width: 100%;
   align-items: center;
   font-size: 1.4rem;
   justify-content: center;
