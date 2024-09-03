@@ -246,7 +246,6 @@ form {
 
 .footer {
   display:flex;
-  position: absolute;
   bottom: 0;
   background: linear-gradient(to right, var(--bgHeader1), var(--bhHeader2));
   height: 4rem;

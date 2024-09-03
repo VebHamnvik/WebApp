@@ -100,7 +100,7 @@ function loadFromApi() {
                 updateProjectsList();
             } catch (error) {
                 if (error instanceof z.ZodError) {
-                    console.error("Invalid data recieved from the server", error.errors);
+                    console.error("Invalid data received from the server", error.errors);
                 }   else {
                     console.log("Unexpected error when validating the date:", error);
                 }
