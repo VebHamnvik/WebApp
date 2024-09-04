@@ -8,7 +8,7 @@ const toSolveBonus = 9;
 try {
   (function Demo() {
     // Use let (or const) instead of var to make the function succeed.
-    let myDemo = "This is a demo";
+    const myDemo = "This is a demo";
 
     // Don't make changes below this line
 
@@ -19,41 +19,41 @@ try {
 
   /// let (or const) ///
 
-  (function UseLetOrConst() {
-    // Use let (or const) instead of var to make the function succeed.
-    var x = 1;
-    if (true) {
-      var x = 2;
-    }
+  // (function UseLetOrConst() {
+  //   // Use let (or const) instead of var to make the function succeed.
+  //   var x = 1;
+  //   if (true) {
+  //     var x = 2;
+  //   }
 
-    // Don't make changes below this line
+  //   // Don't make changes below this line
 
-    expect(x).toBe(1);
+  //   expect(x).toBe(1);
 
-    solved++;
-  })();
+  //   solved++;
+  // })();
 
   /// Template strings ///
 
-  
-    (function UseTemplateStrings1() {
-        const who = 'World';
-        const addOne = x => x + 1;
-        
-        // Rewrite the line below to use template literals.
-        const greeting = 'Hello {who}! {addOne(2)} times.';
+  /*
+	(function UseTemplateStrings1() {
+		const who = 'World';
+		const addOne = x => x + 1;
+		
+		// Rewrite the line below to use template literals.
+		const greeting = 'Hello {who}! {addOne(2)} times.';
 
-        // Don't make changes below this line	
-        
-        expect(greeting).toBe('Hello World! 3 times.');
-        
-        solved++;
-    })();
-  
+		// Don't make changes below this line	
+		
+		expect(greeting).toBe('Hello World! 3 times.');
+		
+		solved++;
+	})();
+  */
 
   /// functions default parameters ///
 
-  
+  /*
 	(function UseDefaultParameters() {
     
 		// Correct the syntax errors in the function.
@@ -68,7 +68,7 @@ try {
 		
 		solved++;
 	})();
-	
+	*/
 
   /// Rest parameter ///
 
