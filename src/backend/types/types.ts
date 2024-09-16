@@ -13,6 +13,6 @@ export const ProjectCreateSchema = ProjectSchema.omit({ id:true });
 
 export const ProjectArraySchema = z.array(ProjectSchema);
 
-export type Project = z.infer<typeof ProjectSchema>;
+export type ProjectType = z.infer<typeof ProjectSchema>;
 
 export type CreateProject = z.infer<typeof ProjectCreateSchema>;
