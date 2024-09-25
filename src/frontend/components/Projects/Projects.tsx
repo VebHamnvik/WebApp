@@ -1,17 +1,24 @@
-import { projects } from "../../../backend/data/projects"
+import { ProjectType } from "../../../backend/types/types";
 import Project from "./Project";
 
-export default function Projects() {
+type ProjectsProps = {
+	projects: ProjectType[];
+};
+
+
+export default function Projects(props: ProjectsProps) {
+
+  const { projects } = props;
+
   return (
       <ul id="project-list">
-        {projects?.map((project) => (
-          <li className="project-item" key={project.id}> 
+        {projects?.map((project: ProjectType) => (
+          <li className="project-item" key={project.title}> 
             <Project
-              id={project.id}
               title={project.title}
               description={project.description}
               objective={project.objective}
-              languages={project.languages}
+              language={project.language}
               image={project.image}
             />
           </li>

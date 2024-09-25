@@ -4,7 +4,8 @@ import SubmitButton from "./SubmitButton";
 import TextArea from "./TextArea";
 
 
-export default function BasicForm() {
+export default function BasicForm({ onAddProject }: { onAddProject: (project: any) => void }) {
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [objective, setObjective] = useState('');
@@ -17,6 +18,7 @@ export default function BasicForm() {
     
 
         const newProject = {
+            
             title,
             description,
             objective,
@@ -25,7 +27,7 @@ export default function BasicForm() {
         };
 
         try {
-            const response = await fetch("/add", {
+            const response = await fetch("http://localhost:3999/add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -36,6 +38,7 @@ export default function BasicForm() {
             if (response.ok) {
                 const data = await response.json();
                 console.log("Project added successfully:", data);
+                onAddProject(newProject);
 
                 setTitle('');
                 setDescription('');
@@ -53,7 +56,7 @@ export default function BasicForm() {
 
     return (
         <>
-        <form id="project-form" method="post">
+        <form onSubmit={handleSubmit} id="project-form" method="post">
             <InputArea id="project-title" placeholder="Title:" name="title" type="text" onChange={(e) => setTitle(e.target.value)}/>
             <TextArea id="project-description" placeholder="Description:" name="description" onChange={(e) => setDescription(e.target.value)}/>
             <InputArea id="project-objective" placeholder="Objective:" name="objective" type="text" onChange={(e) => setObjective(e.target.value)}/>
