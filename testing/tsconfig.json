@@ -1,0 +1,10 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "compilerOptions": {
+    "types": ["vitest", "@types/jest", "@testing-library/jest-dom"]  // Slått sammen til én array
+  }
+}

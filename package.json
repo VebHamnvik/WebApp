@@ -1,0 +1,6 @@
+{
+	"devDependencies": {
+		"@testing-library/react": "^16.0.1",
+		"vitest": "^2.1.2"
+	}
+}
