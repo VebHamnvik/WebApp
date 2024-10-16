@@ -57,11 +57,11 @@ export default function BasicForm({ onAddProject }: { onAddProject: (project: an
     return (
         <>
         <form onSubmit={handleSubmit} id="project-form" method="post">
-            <InputArea id="project-title" placeholder="Title:" name="title" type="text" onChange={(e) => setTitle(e.target.value)}/>
-            <TextArea id="project-description" placeholder="Description:" name="description" onChange={(e) => setDescription(e.target.value)}/>
-            <InputArea id="project-objective" placeholder="Objective:" name="objective" type="text" onChange={(e) => setObjective(e.target.value)}/>
-            <InputArea id="project-language" placeholder="Languages:" name="language" type="text" onChange={(e) => setLanguage(e.target.value)}/>
-            <InputArea id="project-image" placeholder="Image link:" name="image" type="text" onChange={(e) => setImage(e.target.value)}/>
+            <InputArea id="project-title" placeholder="Title:" name="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
+            <TextArea id="project-description" placeholder="Description:" name="description" value={description} onChange={(e) => setDescription(e.target.value)}/>
+            <InputArea id="project-objective" placeholder="Objective:" name="objective" type="text" value={objective} onChange={(e) => setObjective(e.target.value)}/>
+            <InputArea id="project-language" placeholder="Languages:" name="language" type="text" value={language} onChange={(e) => setLanguage(e.target.value)}/>
+            <InputArea id="project-image" placeholder="Image link:" name="image" type="text" value={image} onChange={(e) => setImage(e.target.value)}/>
             <SubmitButton />
         </form>
         </>
