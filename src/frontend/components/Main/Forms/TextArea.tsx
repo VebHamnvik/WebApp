@@ -12,6 +12,7 @@ export default function TextArea(props: TextAreaType) {
         <>
         <label htmlFor={name}>{placeholder}</label>
         <textarea
+            className="formInput"
             id={id}
             name={name}
             placeholder={placeholder}

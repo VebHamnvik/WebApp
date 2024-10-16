@@ -12,6 +12,7 @@ export default function InputArea(props: InputAreaType) {
         <>
         <label htmlFor={name}>{placeholder}</label>
         <input
+            className="formInput"
             placeholder={placeholder}
             id={id}
             name={name}
