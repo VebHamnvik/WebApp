@@ -1,0 +1,14 @@
+Mulige CSS refaktoreringer
+
+Vurder mulige refaktoreringer som kan forbedre din applikasjon. 
+Du skal kommentere hvilke endringer du kan gjøre og fordeler og ulemper med disse. 
+Du trenger IKKE å utføre endringene da du skal lære enda flere alternativer i kommende leksjoner.
+Denne oppgaven er første del av flere refleksjoner som skal gjennomføres.
+
+Bruke mer realtive størrelser på text og size
+Legge inn klasser på elementer som har lik styling i stedet for å bruke samme css på alle id-ene
+Legge inn strengere sizing på elementene som vises i project item slik at de liner opp med de andre project itemen hvis det er flere
+Lagt til noe litt mer spennende farger/iconer på siden får å skape litt mer dynamisk og spennede side å se på
+
+
+

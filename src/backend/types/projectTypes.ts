@@ -5,10 +5,12 @@ export const ProjectSchema = z.object({
     description: z.string(),
     objective: z.string(),
     language: z.string(),
+    createdAt: z.string(),
+    status: z.string(),
+    isPublic: z.boolean(),
+    tags: z.array(z.string()),
     image: z.string()
 });
-
-//export const ProjectCreateSchema = ProjectSchema.omit({ id:true });
 
 export const ProjectArraySchema = z.array(ProjectSchema);
 

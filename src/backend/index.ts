@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { ProjectSchema, ProjectType } from "./types/types";
+import { ProjectSchema, ProjectType } from "./types/projectTypes";
 
 const projects: ProjectType[] = [
   {
@@ -8,6 +8,32 @@ const projects: ProjectType[] = [
     "description": "A library for creating an airport with support for simulating said airport for desired durations",
     "objective": "The objective of this project was to learn C# and .NET",
     "language": "C#",
+    "createdAt": "2024-02-02",
+    "status": "Completed",
+    "isPublic": true,
+    "tags": ["C#", "Development", "API"],
+    "image": "Test"
+    },
+    {
+    "title": "Moove App",
+    "description": "An android app for making the prosess of moving easier. Facilitates selling unwanted items and hiring help or tools",
+    "objective": "The objective of this project was to learn how to develop an android app with kotlin",
+    "language": "Kotlin",
+    "createdAt": "2024-08-16",
+    "status": "In Progress",
+    "isPublic": true,
+    "tags": ["Kotlin", "Development", "Android", "Firebase"],
+    "image": "Test"
+    },
+    {
+    "title": "Portfolio in React",
+    "description": "Designing a portfolio webpage for myself in the WebApps course",
+    "objective": "Learn to become a fullstack developer",
+    "language": "js, ts",
+    "createdAt": "2024-08-16",
+    "status": "In Progress",
+    "isPublic": false,
+    "tags": ["React", "Development", "Web"],
     "image": "Test"
     }
 ];
@@ -15,7 +41,12 @@ const projects: ProjectType[] = [
 
 const app = new Hono();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.get("/", async (c) => {
     return c.json(projects);

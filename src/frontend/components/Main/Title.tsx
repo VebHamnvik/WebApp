@@ -1,14 +1,13 @@
 export type TitleType = {
     title: string
+    id: string
 }
 
 export default function Title(props: TitleType) {
-    const { title } = props
+    const { title, id } = props
 
 
     return (
-        <article>
-            <h2>{ title }</h2>
-        </article>
+        <h2 id={id}>{ title }</h2>
     )
 }
