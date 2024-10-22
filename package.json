@@ -6,6 +6,7 @@
   "scripts": {
     "dev:frontend": "vite",
     "dev:server": "tsx src/backend/server.ts",
+    "db:setup": "tsx src/backend/db/index.ts",
     "dev": "concurrently -n frontend,server -c green,blue \"npm run dev:frontend\" \"npm run dev:server\"",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -13,9 +14,13 @@
   },
   "dependencies": {
     "@hono/node-server": "^1.12.2",
+    "@t3-oss/env-core": "^0.11.1",
+    "@types/better-sqlite3": "^7.6.11",
     "@types/node": "^22.5.5",
+    "better-sqlite3": "^11.5.0",
     "concurrently": "^9.0.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^16.4.5",
     "hono": "^4.6.1",
     "node": "^22.8.0",
     "react": "^18.3.1",
@@ -33,7 +38,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
-    "typescript": "^5.5.3",
+    "typescript": "^5.6.2",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
   }
