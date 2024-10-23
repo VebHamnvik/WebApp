@@ -4,6 +4,7 @@ import { ProjectSchema, ProjectType } from "./types/projectTypes";
 
 const projects: ProjectType[] = [
   {
+    "id": "1",
     "title": "Airport Simulator",
     "description": "A library for creating an airport with support for simulating said airport for desired durations",
     "objective": "The objective of this project was to learn C# and .NET",
@@ -15,6 +16,7 @@ const projects: ProjectType[] = [
     "image": "Test"
     },
     {
+    "id": "2",
     "title": "Moove App",
     "description": "An android app for making the prosess of moving easier. Facilitates selling unwanted items and hiring help or tools",
     "objective": "The objective of this project was to learn how to develop an android app with kotlin",
@@ -26,6 +28,7 @@ const projects: ProjectType[] = [
     "image": "Test"
     },
     {
+    "id": "3",
     "title": "Portfolio in React",
     "description": "Designing a portfolio webpage for myself in the WebApps course",
     "objective": "Learn to become a fullstack developer",
@@ -37,7 +40,6 @@ const projects: ProjectType[] = [
     "image": "Test"
     }
 ];
-
 
 const app = new Hono();
 
@@ -55,7 +57,8 @@ app.get("/", async (c) => {
 app.post("/add", async (c) => {
   try {
       const newProject = await c.req.json();
-      console.log(newProject);
+      const id = (projects.length + 1).toString()
+      newProject.id = id
 
       const project = ProjectSchema.parse(newProject);
 
