@@ -3,7 +3,8 @@ import type { DB } from "./db";
 export const createTables = (db: DB) => {
     db.exec(`
         CREATE TABLE IF NOT EXISTS projects (
-            title TEXT PRIMARY KEY,
+            id TEXT PRIMARY KEY,
+            title TEXT NOT NULL,
             description TEXT NOT NULL,
             objective TEXT NOT NULL,
             language TEXT NOT NULL,

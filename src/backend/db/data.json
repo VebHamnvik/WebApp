@@ -1,6 +1,7 @@
 {
   "projects": [
     {
+      "id": "1",
       "title": "Airport Simulator",
       "description": "A library for creating an airport with support for simulating said airport for desired durations",
       "objective": "The objective of this project was to learn C# and .NET",
@@ -12,6 +13,7 @@
       "image": "Test"
     },
     {
+      "id": "2",
       "title": "Moove App",
       "description": "An android app for making the process of moving easier. Facilitates selling unwanted items and hiring help or tools",
       "objective": "The objective of this project was to learn how to develop an android app with Kotlin",
@@ -23,6 +25,7 @@
       "image": "Test"
     },
     {
+      "id": "3",
       "title": "Portfolio in React",
       "description": "Designing a portfolio webpage for myself in the WebApps course",
       "objective": "Learn to become a fullstack developer",

@@ -11,12 +11,13 @@ export const seed = async (db: DB) => {
     };
 
     const insertProject = db.prepare(`
-        INSERT INTO projects (title, description, objective, language, created_at, status, is_public, tags, image) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`);
+        INSERT INTO projects (id, title, description, objective, language, created_at, status, is_public, tags, image) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
 
         db.transaction(() => {
             for (const project of projects) {
                 insertProject.run(
+                    project.id,
                     project.title,
                     project.description,
                     project.objective,
