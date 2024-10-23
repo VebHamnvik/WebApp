@@ -11,7 +11,7 @@ export const createTables = (db: DB) => {
             created_at TEXT NOT NULL,
             status TEXT NOT NULL,
             is_public BOOLEAN NOT NULL,
-            tags TEXT[] NOT NULL,
+            tags TEXT NOT NULL,
             image TEXT NOT NULL
         );
       `);

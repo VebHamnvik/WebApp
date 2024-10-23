@@ -18,7 +18,7 @@ export default function ExpandedProjectView(props: ProjectType) {
         <p className="project-tags">Tags: {tags.join(", ")}</p>
         <p className="project-ispublic">Public: {isPublic ? "Yes" : "No"}</p>
         <div className="project-image">
-            <img src={image} alt={`${title} project`} />
+            <img src={image} alt={`imagelink`} />
         </div>
       </div>
     );
