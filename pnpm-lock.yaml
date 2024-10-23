@@ -38,6 +38,9 @@ importers:
       node:
         specifier: ^22.8.0
         version: 22.8.0
+      query:
+        specifier: link:@/lib/query
+        version: link:@/lib/query
       react:
         specifier: ^18.3.1
         version: 18.3.1

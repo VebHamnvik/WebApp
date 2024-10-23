@@ -18,7 +18,7 @@ export default function BasicForm({ onAddProject }: { onAddProject: (project: an
     const [image, setImage] = useState('');
 
     const handleTagsInput = (tags: string) => {
-        const tagsArray = tags.split(',').map(tag => tag.trim()).filter(tag => tag !== ""); // Split by comma, trim, and remove empty tags
+        const tagsArray = tags.split(',').map(tag => tag.trim()).filter(tag => tag !== "");
         return tagsArray;
     };
 
@@ -49,7 +49,6 @@ export default function BasicForm({ onAddProject }: { onAddProject: (project: an
         const tagsArray = handleTagsInput(tags)
 
         const newProject = {
-            
             title,
             description,
             objective,

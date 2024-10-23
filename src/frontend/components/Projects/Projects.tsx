@@ -44,6 +44,7 @@ export default function Projects(props: ProjectsProps) {
         >
           {expandedProjectIndex === index ? (
             <ExpandedProjectView
+              id={project.id}
               title={project.title}
               description={project.description}
               objective={project.objective}
@@ -56,6 +57,7 @@ export default function Projects(props: ProjectsProps) {
             />
           ) : (
             <DefaultProject
+              id={project.id}
               title={project.title}
               description={project.description}
               objective={project.objective}

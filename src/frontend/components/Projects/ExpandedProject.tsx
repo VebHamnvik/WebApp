@@ -2,7 +2,7 @@ import { ProjectType } from "../../../backend/types/projectTypes"
 import { dateFormatter } from "../../../backend/util/dateFormatter";
 
 export default function ExpandedProjectView(props: ProjectType) {
-    const { title, description, objective, language, createdAt, status, isPublic, tags, image } = props
+    const { id, title, description, objective, language, createdAt, status, isPublic, tags, image } = props
 
     const formattedDate = dateFormatter(createdAt)
 
