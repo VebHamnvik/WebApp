@@ -50,11 +50,11 @@ app.use(
   })
 );
 
-app.get("/", async (c) => {
+app.get("/api/projects", async (c) => {
     return c.json(projects);
 });
 
-app.post("/add", async (c) => {
+app.post("/api/projects", async (c) => {
   try {
       const newProject = await c.req.json();
       const id = (projects.length + 1).toString()
