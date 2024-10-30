@@ -103,23 +103,31 @@ app.post("/v1/api/projects", async (c) => {
 
 
 
-app.delete(`/v1/api/projects/:id`, async (c) => {
+app.delete("/v1/api/projects/:id", async (c) => {
   const id = c.req.param("id");
-  const projectExist = projects.some((project) => project.id === id);
-  
-  if (!projectExist) {
-    return c.json({
-      error: "Project not found",
-      status: 404,
-      success: false,
-    });
-  }
 
-  
-  
-  projects = projects.filter((project) => project.id !== id);
-  return c.json({ data: projects, success: true });
+  try {
+    const result = await repo.remove(id);
+
+    if (!result.success) {
+      return c.json({
+        error: result.error.message,
+        status: 404,
+        success: false,
+      });
+    }
+
+    return c.json({
+      message: "Project deleted successfully",
+      data: result.data,
+      success: true,
+    });
+  } catch (error) {
+    console.error("Error deleting project:", error);
+    return c.json({ error: "Failed to delete project", status: 500, success: false });
+  }
 });
+
 
 
 app.patch(`/v1/api/projects/:id`, async (c) => {
