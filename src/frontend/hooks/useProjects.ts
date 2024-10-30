@@ -14,11 +14,9 @@ export const useProjects = () => {
       setLoading(true);
       try {
         let response = await getProjects();
-        console.log(response)
         const data = fromDbArray(response)
 
         const validatedProjects = ProjectArraySchema.parse(data);
-        console.log(validatedProjects)
         setProjects(validatedProjects);
       } catch (error) {
         setError("Error loading projects");

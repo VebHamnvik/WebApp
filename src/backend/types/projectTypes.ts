@@ -38,7 +38,7 @@ export type DbProject = {
     language: string;
     createdAt: string;
     status: string;
-    is_public: number;
+    isPublic: number;
     tags: string;
     image: string;
   };

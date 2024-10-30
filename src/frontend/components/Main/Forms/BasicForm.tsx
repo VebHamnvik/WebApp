@@ -70,8 +70,15 @@ export default function BasicForm({ onAddProject }: { onAddProject: (project: an
 
             if (response.ok) {
                 const data = await response.json();
-                console.log("Project added successfully:", data);
-                onAddProject(data.project);
+                console.log("Api response:", data)
+
+                const projectData = {
+                    ...data.dbProject,
+                    isPublic: data.dbProject.isPublic === 1,
+                    tags: Array.isArray(data.dbProject.tags) ? data.dbProject.tags : data.dbProject.tags.split(","),
+                };
+
+                onAddProject(projectData);
 
                 setTitle('');
                 setDescription('');

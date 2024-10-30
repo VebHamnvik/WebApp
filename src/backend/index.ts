@@ -78,29 +78,29 @@ app.get("/v1/api/projects", async (c) => {
 
 app.post("/v1/api/projects", async (c) => {
   try {
-      const newProject = await c.req.json();
-      const project = ProjectSchema.parse(newProject);
+    const newProject = await c.req.json();
+    const project = ProjectSchema.parse(newProject);
 
-      const dbProject = toDb(project)
-      console.log(dbProject)
+    const dbProject = toDb(project);
+    const data1 = await repo.create(dbProject);
 
-      const data1 = await repo.create(dbProject)
-
-      return c.json({ message: "Project added successfully", data1 }, { status: 200 });
+    console.log("dbProject in API:", dbProject);
+    return c.json({ message: "Project added successfully", dbProject: dbProject }, { status: 200 });
   } catch (error) {
-      if (error instanceof z.ZodError) {
-          const validationErrors = error.errors.map(err => ({
-              field: err.path[0],
-              message: err.message
-          }));
-          console.error("Validation errors:", validationErrors);
-          return c.json({ error: "Validation failed", details: validationErrors }, { status: 400 });
-      } else {
-          console.error("Error adding project:", error);
-          return c.json({ error: "Failed to add project" }, { status: 500 });
-      }
+    if (error instanceof z.ZodError) {
+      const validationErrors = error.errors.map(err => ({
+        field: err.path[0],
+        message: err.message
+      }));
+      console.error("Validation errors:", validationErrors);
+      return c.json({ error: "Validation failed", details: validationErrors }, { status: 400 });
+    } else {
+      console.error("Error adding project:", error);
+      return c.json({ error: "Failed to add project" }, { status: 500 });
+    }
   }
 });
+
 
 
 app.delete(`/v1/api/projects/:id`, async (c) => {

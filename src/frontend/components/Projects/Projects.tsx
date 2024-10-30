@@ -16,8 +16,6 @@ export default function Projects(props: ProjectsProps) {
   const [ expandedProjectIndex, setExpandedProjectIndex] = useState<number | null>(null)
   const [visibleProjects, setVisibleProjects] = useState<ProjectType[]>([]);
 
-  console.log("Projects in Projects component:", projects)
-
   useEffect(() => {
     const user = getUserFromCookies();
 

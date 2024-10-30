@@ -8,9 +8,9 @@ export const createTables = (db: DB) => {
             description TEXT NOT NULL,
             objective TEXT NOT NULL,
             language TEXT NOT NULL,
-            created_at TEXT NOT NULL,
+            createdAt TEXT NOT NULL,
             status TEXT NOT NULL,
-            is_public BOOLEAN NOT NULL,
+            isPublic BOOLEAN NOT NULL,
             tags TEXT NOT NULL,
             image TEXT NOT NULL
         );

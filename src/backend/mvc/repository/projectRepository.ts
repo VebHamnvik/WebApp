@@ -19,7 +19,7 @@ export const createProjectRepository = (db: DB) => {
         console.log(data)
         try {
             const query = db.prepare(`
-            INSERT INTO projects (id, title, description, objective, language, created_at, status, is_public, tags, image)
+            INSERT INTO projects (id, title, description, objective, language, createdAt, status, isPublic, tags, image)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             `);
         
@@ -29,9 +29,9 @@ export const createProjectRepository = (db: DB) => {
             data.description,
             data.objective,
             data.language,
-            data.created_at,
+            data.createdAt,
             data.status,
-            data.is_public ? 1 : 0,
+            data.isPublic ? 1 : 0,
             data.tags,
             data.image
             );
@@ -98,7 +98,7 @@ export const createProjectRepository = (db: DB) => {
 
             const query = db.prepare(`
                 UPDATE projects
-                SET title = ?, description = ?, objective = ?, language = ?, status = ?, is_public = ?, tags = ?, image = ?, updated_at = ?
+                SET title = ?, description = ?, objective = ?, language = ?, status = ?, isPublic = ?, tags = ?, image = ?, updated_at = ?
                 WHERE id = ?
             `);
         

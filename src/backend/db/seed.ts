@@ -11,7 +11,7 @@ export const seed = async (db: DB) => {
     };
 
     const insertProject = db.prepare(`
-        INSERT INTO projects (id, title, description, objective, language, created_at, status, is_public, tags, image) 
+        INSERT INTO projects (id, title, description, objective, language, createdAt, status, isPublic, tags, image) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`);
 
         db.transaction(() => {

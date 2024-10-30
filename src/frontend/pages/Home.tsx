@@ -7,29 +7,27 @@ import { useProjects } from "../hooks/useProjects"
 export default function Home() {
     const { projects, setProjects, error, loading } = useProjects();
 
-    console.log("Projects in Homepage:", projects)
+    const onAddProject = (project: {title: string, description: string, objective: string, language: string, createdAt: string, image: string }) => {
+      setProjects((prev: any) => [...prev, project]);
+    };
 
-  
+    console.log("Projects in Home:", projects)
 
-	const onAddProject = (project: {title: string, description: string, objective: string, language: string, createdAt: string, image: string }) => {
-		setProjects((prev: any) => [...prev, project]);
-	};
-
-  
-
-  return (
-    <>
-    <Layout>
-      <section id="new-project">
-        <Title id="new-project-title" title="Add a new project" />
-        <BasicForm onAddProject={onAddProject}/>
-      </section>
-      <section id="projects-list">
-        <Title id="project-list-title" title="My projects:" />
-        {loading ? <p>Loading projects...</p> : <Projects projects={projects}/>}
-      </section>
-    </Layout>
-    </>
     
-  )
+
+    return (
+      <>
+      <Layout>
+        <section id="new-project">
+          <Title id="new-project-title" title="Add a new project" />
+          <BasicForm onAddProject={onAddProject}/>
+        </section>
+        <section id="projects-list">
+          <Title id="project-list-title" title="My projects:" />
+          {loading ? <p>Loading projects...</p> : <Projects projects={projects}/>}
+        </section>
+      </Layout>
+      </>
+      
+    )
 }
