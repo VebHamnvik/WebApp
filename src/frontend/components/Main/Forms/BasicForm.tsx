@@ -3,6 +3,8 @@ import InputArea from "./InputArea";
 import SubmitButton from "./SubmitButton";
 import TextArea from "./TextArea";
 import SelectArea from './SelectArea';
+import { endpoints } from '../../../config/urls';
+import { ProjectSchema } from '../../../../backend/types/projectTypes';
 
 
 export default function BasicForm({ onAddProject }: { onAddProject: (project: any) => void }) {
@@ -16,6 +18,7 @@ export default function BasicForm({ onAddProject }: { onAddProject: (project: an
     const [isPublic, setIsPublic] = useState('');
     const [tags, setTags] = useState('');
     const [image, setImage] = useState('');
+    const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
     const handleTagsInput = (tags: string) => {
         const tagsArray = tags.split(',').map(tag => tag.trim()).filter(tag => tag !== "");
@@ -31,24 +34,10 @@ export default function BasicForm({ onAddProject }: { onAddProject: (project: an
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
 
-        const today = new Date();
-        const inputDate = new Date(createdAt);
-
-        if (inputDate > today) {
-            alert("The date cannot be in the future.");
-            return;
-        }
-
-        const earliestDate = new Date("1995-06-02");
-        if (inputDate < earliestDate) {
-            alert("The project date cannot be before I was born.");
-            return;
-        }
-    
-
         const tagsArray = handleTagsInput(tags)
 
         const newProject = {
+            id: crypto.randomUUID(),
             title,
             description,
             objective,
@@ -60,19 +49,29 @@ export default function BasicForm({ onAddProject }: { onAddProject: (project: an
             image
         };
 
+        const validation = ProjectSchema.safeParse(newProject);
+
+        if (!validation.success) {
+            const errors = validation.error.errors.map(err => `${err.path[0]}: ${err.message}`);
+            setErrorMessages(errors);
+            console.error("Validation errors:", errors);
+            return;
+        }
+
         try {
-            const response = await fetch("http://localhost:3999/add", {
+
+            const response = await fetch(endpoints.projects, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(newProject),
+                body: JSON.stringify(validation.data),
             });
 
             if (response.ok) {
                 const data = await response.json();
                 console.log("Project added successfully:", data);
-                onAddProject(newProject);
+                onAddProject(data.project);
 
                 setTitle('');
                 setDescription('');

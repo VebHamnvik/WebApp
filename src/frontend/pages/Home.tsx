@@ -7,6 +7,8 @@ import { useProjects } from "../hooks/useProjects"
 export default function Home() {
     const { projects, setProjects, error, loading } = useProjects();
 
+    console.log("Projects in Homepage:", projects)
+
   
 
 	const onAddProject = (project: {title: string, description: string, objective: string, language: string, createdAt: string, image: string }) => {

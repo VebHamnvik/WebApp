@@ -5,3 +5,8 @@ export function dateFormatter(dateString: string): string {
     const date = new Date(dateString);
     return format(date, "PPP", { locale: nb });
 }
+
+export function formatDateForStorage(dateString: string): string {
+    const date = new Date(dateString);
+    return format(date, "yyyy-MM-dd");
+}

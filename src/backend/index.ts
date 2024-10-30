@@ -1,8 +1,12 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { ProjectSchema, ProjectType } from "./types/projectTypes";
+import { z } from "zod";
+import { createProjectRepository } from "./mvc/repository/projectRepository";
+import { db } from "./db/db"
+import { toDb, fromDbArray } from "./mvc/mappers/mappers";
 
-const projects: ProjectType[] = [
+let projects: ProjectType[] = [
   {
     "id": "1",
     "title": "Airport Simulator",
@@ -42,6 +46,7 @@ const projects: ProjectType[] = [
 ];
 
 const app = new Hono();
+const repo = createProjectRepository(db)
 
 app.use(
   cors({
@@ -50,25 +55,80 @@ app.use(
   })
 );
 
-app.get("/api/projects", async (c) => {
+app.get("/v1/api/projects", async (c) => {
+  try {
+    const data1 = await repo.list();
+    
+    if (!data1.success) {
+      console.error("Error fetching projects:", data1.error);
+      return c.json({ error: data1.error.message }, { status: 500 });
+    }
+
+    const projects = fromDbArray(data1.data);
     return c.json(projects);
+    
+  } catch (error) {
+    console.error("Unexpected error fetching projects:", error);
+    return c.json({ error: "Failed to fetch projects" }, { status: 500 });
+  }
 });
 
-app.post("/api/projects", async (c) => {
+
+
+
+app.post("/v1/api/projects", async (c) => {
   try {
       const newProject = await c.req.json();
-      const id = (projects.length + 1).toString()
-      newProject.id = id
-
       const project = ProjectSchema.parse(newProject);
 
-      if (!project) return c.json({ error: "Invalid project" }, { status: 400 });
-      projects.push(project);
+      const dbProject = toDb(project)
+      console.log(dbProject)
 
-      return c.json({ message: "Project added successfully" }, { status: 200 });
-    } catch (error){
-        console.error("Error adding project:", error);
-        return c.json({ error: "Failed to add project" }, { status: 500 });
-    }})
+      const data1 = await repo.create(dbProject)
+
+      return c.json({ message: "Project added successfully", data1 }, { status: 200 });
+  } catch (error) {
+      if (error instanceof z.ZodError) {
+          const validationErrors = error.errors.map(err => ({
+              field: err.path[0],
+              message: err.message
+          }));
+          console.error("Validation errors:", validationErrors);
+          return c.json({ error: "Validation failed", details: validationErrors }, { status: 400 });
+      } else {
+          console.error("Error adding project:", error);
+          return c.json({ error: "Failed to add project" }, { status: 500 });
+      }
+  }
+});
+
+
+app.delete(`/v1/api/projects/:id`, async (c) => {
+  const id = c.req.param("id");
+  const projectExist = projects.some((project) => project.id === id);
+  
+  if (!projectExist) {
+    return c.json({
+      error: "Project not found",
+      status: 404,
+      success: false,
+    });
+  }
+
+  
+  
+  projects = projects.filter((project) => project.id !== id);
+  return c.json({ data: projects, success: true });
+});
+
+
+app.patch(`/v1/api/projects/:id`, async (c) => {
+  const id = c.req.param("id");
+  const { name } = await c.req.json();
+  projects = projects.map((project) =>
+    project.id === id ? { ...project, name } : project
+  );
+  return c.json(projects);
+});
   
 export { app };

@@ -3,6 +3,7 @@ import { ProjectType } from "../../../backend/types/projectTypes";
 import DefaultProject from "./DefaultProject";
 import ExpandedProjectView from "./ExpandedProject";
 import { getUserFromCookies } from "../../../backend/util/auth";
+import { baseUrl } from "../../config/urls";
 
 type ProjectsProps = {
 	projects: ProjectType[];
@@ -15,6 +16,8 @@ export default function Projects(props: ProjectsProps) {
   const [ expandedProjectIndex, setExpandedProjectIndex] = useState<number | null>(null)
   const [visibleProjects, setVisibleProjects] = useState<ProjectType[]>([]);
 
+  console.log("Projects in Projects component:", projects)
+
   useEffect(() => {
     const user = getUserFromCookies();
 
@@ -23,6 +26,7 @@ export default function Projects(props: ProjectsProps) {
     } else {
       setVisibleProjects(projects.filter((project) => project.isPublic));
     }
+
   }, [projects]);
 
   const toggleExpansion = (index: number) => {
@@ -33,41 +37,38 @@ export default function Projects(props: ProjectsProps) {
     }
   };
 
+  const onRemove = async (projectId: string) => {
+    try {
+      const response = await fetch(`${baseUrl}/v1/api/projects/${projectId}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setVisibleProjects(visibleProjects.filter((project) => project.id !== projectId));
+      } else {
+        console.error("Failed to delete project:", await response.json());
+      }
+    } catch (error) {
+      console.error("Error deleting project:", error);
+    }
+  };
+
   return (
     <ul id="project-list">
       {visibleProjects?.map((project: ProjectType, index: number) => (
         <li
           className="project-item"
-          key={project.title}
+          key={project.id || index}
           onClick={() => toggleExpansion(index)}
           style={{ cursor: "pointer" }}
         >
           {expandedProjectIndex === index ? (
             <ExpandedProjectView
-              id={project.id}
-              title={project.title}
-              description={project.description}
-              objective={project.objective}
-              language={project.language}
-              createdAt={project.createdAt}
-              status={project.status}
-              isPublic={project.isPublic}
-              tags={project.tags}
-              image={project.image}
+              {...project}
+              onRemove={() => onRemove(project.id)}
             />
           ) : (
-            <DefaultProject
-              id={project.id}
-              title={project.title}
-              description={project.description}
-              objective={project.objective}
-              language={project.language}
-              createdAt={project.createdAt}
-              status={project.status}
-              isPublic={project.isPublic}
-              tags={project.tags}
-              image={project.image}
-            />
+            <DefaultProject {...project} />
           )}
         </li>
       ))}

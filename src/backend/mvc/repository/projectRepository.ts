@@ -1,11 +1,11 @@
 import type { DB } from "../../db/db";
 import { Result } from "../../types/resultTypes";
-import { ProjectType } from "../../types/projectTypes";
+import { DbProject, ProjectType } from "../../types/projectTypes";
 
-import { fromDb, toDb } from "../mappers";
+import { fromDb, toDb } from "../mappers/mappers";
 
 
-export const createHabitRepository = (db: DB) => {
+export const createProjectRepository = (db: DB) => {
 
     const exist = async (id: string): Promise<boolean> => {
         const query = db.prepare(
@@ -15,60 +15,61 @@ export const createHabitRepository = (db: DB) => {
         return data.count > 0;
       };
 
-    const create = async (data: ProjectType): Promise<Result<string>> => {
-    try {
-        const query = db.prepare(`
-        INSERT INTO projects (id, title, description, objective, language, created_at, status, is_public, tags, image)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        `);
-    
-        query.run(
-        data.id,
-        data.title,
-        data.description,
-        data.objective,
-        data.language,
-        data.createdAt,
-        data.status,
-        data.isPublic ? 1 : 0,
-        data.tags.join(","),
-        data.image
-        );
-    
-        return {
-        success: true,
-        data: data.title,
-        };
-    } catch (error) {
-        return {
-            success: false,
-            error: {
-                code: "INTERNAL_SERVER_ERROR",
-                message: error instanceof Error ? error.message : "An unknown error occurred",
-            },
-        };
-    }
-    };
-
-    const list = async (): Promise<Result<ProjectType[]>> => {
+    const create = async (data: DbProject): Promise<Result<string>> => {
+        console.log(data)
         try {
-          const query = db.prepare("SELECT * FROM projects");
-          const data = query.all() as ProjectType[];
-      
-          return {
+            const query = db.prepare(`
+            INSERT INTO projects (id, title, description, objective, language, created_at, status, is_public, tags, image)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            `);
+        
+            query.run(
+            data.id,
+            data.title,
+            data.description,
+            data.objective,
+            data.language,
+            data.created_at,
+            data.status,
+            data.is_public ? 1 : 0,
+            data.tags,
+            data.image
+            );
+        
+            return {
             success: true,
-            data,
-          };
+            data: data.id,
+            };
         } catch (error) {
             return {
                 success: false,
                 error: {
-                code: "INTERNAL_SERVER_ERROR",
-                message: error instanceof Error ? error.message : "An unknown error occurred",
+                    code: "INTERNAL_SERVER_ERROR",
+                    message: error instanceof Error ? error.message : "An unknown error occurred",
                 },
             };
         }
-      };
+    };
+
+    const list = async (): Promise<Result<DbProject[]>> => {
+        try {
+            const query = db.prepare("SELECT * FROM projects");
+            const data = query.all() as DbProject[];
+            return {
+                success: true,
+                data,
+            };
+        } catch (error) {
+            return {
+                success: false,
+                error: {
+                    code: "INTERNAL_SERVER_ERROR",
+                    message: error instanceof Error ? error.message : "An unknown error occurred",
+                },
+            };
+        }
+    };
+    
 
       const update = async (data: Partial<ProjectType>): Promise<Result<Partial<ProjectType>>> => {
         try {
@@ -195,4 +196,4 @@ export const createHabitRepository = (db: DB) => {
   return { create, list, update, remove, getProjectById };
 };
 
-export type HabitRepository = ReturnType<typeof createHabitRepository>;
+export type ProjectRepository = ReturnType<typeof createProjectRepository>;
